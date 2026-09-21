@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://41gfludu32od"
+path="res://.godot/imported/Tails.obj-8d4a43d54b6f7a9e42890d67b7da998c.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Tails.obj-8d4a43d54b6f7a9e42890d67b7da998c.mesh"]
+
+source_file="res://Assets/Models/tails-obj-free-3d-model/source/cadnav.com_model/Model_C0812063/Tails.obj"
+dest_files=["res://.godot/imported/Tails.obj-8d4a43d54b6f7a9e42890d67b7da998c.mesh", "res://.godot/imported/Tails.obj-8d4a43d54b6f7a9e42890d67b7da998c.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

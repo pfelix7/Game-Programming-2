@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Module 2"
+run/main_scene="uid://bq800usqi0pco"
 config/features=PackedStringArray("4.7", "Mobile")
 config/icon="res://icon.svg"
 
