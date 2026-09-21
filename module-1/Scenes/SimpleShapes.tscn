@@ -1,0 +1,103 @@
+[gd_scene format=3 uid="uid://3pssrry8xdu6"]
+
+[ext_resource type="Script" uid="uid://hkodeeideobm" path="res://Scripts/character_body_3d.gd" id="1_jocom"]
+[ext_resource type="Script" uid="uid://dgtigf20afpvq" path="res://Scripts/camera_first_person.gd" id="2_6h2km"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_87fs3"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_jocom"]
+sky_material = SubResource("ProceduralSkyMaterial_87fs3")
+
+[sub_resource type="Environment" id="Environment_6h2km"]
+background_mode = 2
+sky = SubResource("Sky_jocom")
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nm11u"]
+albedo_color = Color(0.52156866, 0.16470589, 0.05490196, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_84o1g"]
+material = SubResource("StandardMaterial3D_nm11u")
+size = Vector2(30, 30)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2h85o"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_87fs3"]
+albedo_color = Color(1, 1, 0.13333334, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_84o1g"]
+material = SubResource("StandardMaterial3D_87fs3")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jocom"]
+points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xbaqe"]
+albedo_color = Color(0, 0.8352941, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_2h85o"]
+material = SubResource("StandardMaterial3D_xbaqe")
+radius = 0.37911987
+height = 0.75823975
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6h2km"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bd8x5"]
+albedo_color = Color(0, 0.8352941, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_84o1g"]
+material = SubResource("StandardMaterial3D_bd8x5")
+
+[node name="SimpleShapes" type="Node3D" unique_id=693403950]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1016372752]
+environment = SubResource("Environment_6h2km")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2077232734]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=1758477248]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=2064243723]
+mesh = SubResource("PlaneMesh_84o1g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=1545341380]
+transform = Transform3D(1.495, 0, 0, 0, 1.495, 0, 0, 0, 1.495, 0, 0, 0)
+shape = SubResource("WorldBoundaryShape3D_2h85o")
+
+[node name="Wall" type="MeshInstance3D" parent="." unique_id=1259831897]
+transform = Transform3D(5.889926, 0, 0, 0, 4.313937, 0, 0, 0, 1, 0, 2.1796017, -4.2466297)
+mesh = SubResource("BoxMesh_84o1g")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Wall" unique_id=613209388]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall/StaticBody3D" unique_id=89600545]
+shape = SubResource("ConvexPolygonShape3D_jocom")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1070860611]
+transform = Transform3D(0.999899, -0.014208535, 0, 0.014208535, 0.999899, 0, 0, 0, 1, 0, 1.3655069, 0)
+script = ExtResource("1_jocom")
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D" unique_id=1630082952 node_paths=PackedStringArray("parent_character")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04026147, 0.6299138, 0.004951358)
+script = ExtResource("2_6h2km")
+parent_character = NodePath("..")
+
+[node name="ArmPivot" type="Node3D" parent="CharacterBody3D" unique_id=1250367924]
+transform = Transform3D(1.0000001, 9.313226e-10, 0, -9.313226e-10, 1.0000001, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Arm1" type="MeshInstance3D" parent="CharacterBody3D/ArmPivot" unique_id=960959387]
+transform = Transform3D(-0.074292846, -0.24588256, 0.2413077, -0.25364548, 0.3456556, -0.041637857, -0.08327458, -0.83346736, -0.088456616, -0.37813947, 0.28872812, -0.35326403)
+mesh = SubResource("CapsuleMesh_2h85o")
+
+[node name="Arm2" type="MeshInstance3D" parent="CharacterBody3D/ArmPivot/Arm1" unique_id=1067574928]
+transform = Transform3D(0.9709934, -0.5122233, -0.17359057, 0.009115696, 0.84558207, -0.14837588, 0.2523733, 1.8384151, 0.8257237, -0.852767, -0.2773248, 2.8665316)
+mesh = SubResource("CapsuleMesh_2h85o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=2097832334]
+shape = SubResource("CapsuleShape3D_6h2km")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D" unique_id=583113755]
+mesh = SubResource("CapsuleMesh_84o1g")
